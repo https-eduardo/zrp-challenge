@@ -6,3 +6,52 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}
+
+model Hero {
+  id        Int        @id @default(autoincrement())
+  name      String
+  imageUrl  String?
+  rank      HeroRank
+  latitude  Float
+  longitude Float
+  status    HeroStatus @default(AVAILABLE)
+  createdAt DateTime   @default(now())
+  history   History[]
+}
+
+enum HeroRank {
+  S
+  A
+  B
+  C
+}
+
+enum HeroStatus {
+  AVAILABLE
+  UNAVAILABLE
+}
+
+model History {
+  id         Int        @id @default(autoincrement())
+  hero       Hero       @relation(fields: [heroId], references: [id])
+  heroId     Int
+  threatName String
+  threatRank ThreatRank
+  finishDate DateTime
+  createdAt  DateTime   @default(now())
+}
+
+enum ThreatRank {
+  God
+  Dragon
+  Tiger
+  Wolf
+}
