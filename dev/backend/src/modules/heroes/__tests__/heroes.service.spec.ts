@@ -2,9 +2,12 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { HeroesService } from '../heroes.service';
 import { PrismaService } from '../../prisma/prisma.service';
 import { getMockHero } from './__mocks__/hero.mock';
+import { threatOccurence } from '../../threats/__tests__/__mocks__/threat-occurence.mock';
+import { Hero } from '@prisma/client';
 
 describe('HeroesService', () => {
   let service: HeroesService;
+  let closeHeroes: Hero[];
   const mockHero = getMockHero();
 
   beforeEach(async () => {
@@ -64,5 +67,25 @@ describe('HeroesService', () => {
     const hero = await service.deleteOne(1);
 
     expect(hero.name).toBe(mockHero.name);
+  });
+
+  it('should retrieve closest heroes to the occurrence', async () => {
+    const mockData = { data: [mockHero, getMockHero(10, 8)] } as any;
+    jest.spyOn(service, 'findMany').mockResolvedValue(mockData);
+    closeHeroes = await service.getOccurrenceClosestHeroes(threatOccurence);
+
+    expect(closeHeroes).toHaveLength(2);
+    expect(closeHeroes[0].longitude).toBe(8);
+    expect(closeHeroes[1].latitude).toBe(mockHero.latitude);
+  });
+
+  it('should retrieve hero/heroes to be allocated to an occurrence', () => {
+    const allocatedHeroes = service.getHeroesAllocationCombination(
+      closeHeroes,
+      threatOccurence,
+    );
+
+    expect(allocatedHeroes).toHaveLength(1);
+    expect(closeHeroes[0].longitude).toBe(8);
   });
 });

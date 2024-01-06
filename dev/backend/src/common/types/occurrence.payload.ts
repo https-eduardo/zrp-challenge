@@ -1,9 +1,5 @@
 import { ThreatRank } from '@prisma/client';
-
-interface ThreatLocation {
-  lat: number;
-  lng: number;
-}
+import { Coordinates } from './coordinates';
 
 interface MonsterInfo {
   name: string;
@@ -12,7 +8,7 @@ interface MonsterInfo {
 }
 
 export interface ThreatOccurence {
-  location: ThreatLocation[];
+  location: Coordinates[];
   dangerLevel: ThreatRank;
   monster: MonsterInfo;
 }

@@ -1,11 +1,12 @@
-import { HeroRank } from '@prisma/client';
+import { HeroRank, HeroStatus } from '@prisma/client';
 
-export const getMockHero = () => {
+export const getMockHero = (lat?: number, lng?: number) => {
   return {
     name: 'mockheroname',
     imageUrl: 'http://www.imagesmocked.mock/mockheroimage.png',
     rank: HeroRank.S,
-    latitude: 10.514,
-    longitude: 9.1423,
+    status: HeroStatus.AVAILABLE,
+    latitude: lat ?? 10.514,
+    longitude: lng ?? 9.1423,
   };
 };

@@ -2,7 +2,7 @@ import { WebSocketGateway } from '@nestjs/websockets';
 import { ThreatsService } from './threats.service';
 import { OnModuleInit } from '@nestjs/common';
 import { Socket, io } from 'socket.io-client';
-import { ThreatOccurence } from 'src/common/types/occurrence.payload';
+import { ThreatOccurence } from '../../common/types/occurrence.payload';
 
 @WebSocketGateway()
 export class ThreatsGateway implements OnModuleInit {
