@@ -5,9 +5,17 @@ import * as cookieParser from 'cookie-parser';
 import { PrismaClient, User } from '@prisma/client';
 import { getMockUser } from 'src/modules/users/__tests__/__mocks__/user.mock';
 import * as bcrypt from 'bcryptjs';
+import * as jwt from 'jsonwebtoken';
 
 export let app: INestApplication;
 export let createdUser: User;
+export let authCookie: string;
+
+async function setupAuthCookie(user: User) {
+  const token = jwt.sign(user, process.env.JWT_SECRET);
+
+  authCookie = `accessToken=${token}; Path=/; HttpOnly;`;
+}
 
 async function setupUser(prisma: PrismaClient) {
   const mockUser = getMockUser();
@@ -29,6 +37,7 @@ global.beforeAll(async () => {
   const prisma = new PrismaClient();
 
   await setupUser(prisma);
+  await setupAuthCookie(createdUser);
 });
 
 global.beforeEach(async () => {
