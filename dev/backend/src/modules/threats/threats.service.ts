@@ -13,6 +13,8 @@ export class ThreatsService {
       closeHeroes,
       occurrence,
     );
-    console.log(allocatedHeroes);
+    allocatedHeroes.forEach((hero) => {
+      this.heroesService.allocateHero(hero, occurrence);
+    });
   }
 }

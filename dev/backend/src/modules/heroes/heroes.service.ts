@@ -100,6 +100,27 @@ export class HeroesService {
     });
   }
 
+  private getDurationOfAllocation(occurence: ThreatOccurence) {
+    const { min, max } = ALLOCATIONS[occurence.dangerLevel].duration;
+    return Math.random() * (max - min + 1) + min;
+  }
+
+  private async updateHeroStatus(id: number, status: HeroStatus) {
+    return await this.prisma.hero.update({
+      where: { id },
+      data: { status },
+    });
+  }
+
+  async allocateHero(hero: Hero, occurence: ThreatOccurence) {
+    const durationInSeconds = this.getDurationOfAllocation(occurence);
+    await this.updateHeroStatus(hero.id, HeroStatus.UNAVAILABLE);
+
+    setTimeout(() => {
+      this.updateHeroStatus(hero.id, HeroStatus.AVAILABLE);
+    }, durationInSeconds * 1000);
+  }
+
   private isPriorityHero(hero: Hero, occurrence: ThreatOccurence) {
     return (
       HEROES_PRIORITIES[hero.rank].power ===
