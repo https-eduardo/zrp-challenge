@@ -7,6 +7,7 @@ import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { HeroesModule } from './modules/heroes/heroes.module';
 import { ThreatsModule } from './modules/threats/threats.module';
+import { HistoryModule } from './modules/history/history.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ThreatsModule } from './modules/threats/threats.module';
     AuthModule,
     HeroesModule,
     ThreatsModule,
+    HistoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
