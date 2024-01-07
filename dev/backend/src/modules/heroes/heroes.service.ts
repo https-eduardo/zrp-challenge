@@ -11,10 +11,15 @@ import { Coordinates } from 'src/common/types/coordinates';
 import { ThreatOccurence } from 'src/common/types/occurrence.payload';
 import { Hero, HeroStatus } from '@prisma/client';
 import { ALLOCATIONS, HEROES_PRIORITIES } from '../threats/threats.allocation';
+import { HistoryService } from '../history/history.service';
+import { CreateHistoryRecordDto } from '../history/dto/create-history-record.dto';
 
 @Injectable()
 export class HeroesService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly historyService: HistoryService,
+  ) {}
 
   async create(createHeroDto: CreateHeroDto) {
     try {
@@ -100,25 +105,35 @@ export class HeroesService {
     });
   }
 
-  private getDurationOfAllocation(occurence: ThreatOccurence) {
-    const { min, max } = ALLOCATIONS[occurence.dangerLevel].duration;
-    return Math.random() * (max - min + 1) + min;
-  }
-
-  private async updateHeroStatus(id: number, status: HeroStatus) {
+  async updateHeroStatus(id: number, status: HeroStatus) {
     return await this.prisma.hero.update({
       where: { id },
       data: { status },
     });
   }
 
-  async allocateHero(hero: Hero, occurence: ThreatOccurence) {
-    const durationInSeconds = this.getDurationOfAllocation(occurence);
+  async allocateHero(
+    hero: Hero,
+    occurrence: ThreatOccurence,
+    duration: number,
+  ) {
     await this.updateHeroStatus(hero.id, HeroStatus.UNAVAILABLE);
 
     setTimeout(() => {
       this.updateHeroStatus(hero.id, HeroStatus.AVAILABLE);
-    }, durationInSeconds * 1000);
+    }, duration * 1000);
+
+    const finishDate = new Date();
+    finishDate.setSeconds(finishDate.getSeconds() + duration);
+
+    const historyRecord: CreateHistoryRecordDto = {
+      heroId: hero.id,
+      finishDate,
+      threatName: occurrence.monster.name,
+      threatRank: occurrence.dangerLevel,
+    };
+
+    await this.historyService.createNewRecord(historyRecord);
   }
 
   private isPriorityHero(hero: Hero, occurrence: ThreatOccurence) {
@@ -187,5 +202,12 @@ export class HeroesService {
     dist = dist * 1.609344;
 
     return dist;
+  }
+
+  async markAllHeroesAsAvailable() {
+    return await this.prisma.hero.updateMany({
+      where: { status: HeroStatus.UNAVAILABLE },
+      data: { status: HeroStatus.AVAILABLE },
+    });
   }
 }

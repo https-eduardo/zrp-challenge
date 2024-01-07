@@ -1,13 +1,13 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { CreateRecordDto } from './dto/create-record.dto';
+import { CreateHistoryRecordDto } from './dto/create-history-record.dto';
 import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
 
 @Injectable()
 export class HistoryService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async createNewRecord(createRecordDto: CreateRecordDto) {
+  async createNewRecord(createRecordDto: CreateHistoryRecordDto) {
     return await this.prisma.history.create({ data: createRecordDto });
   }
 

@@ -20,6 +20,7 @@ describe('ThreatsService', () => {
             getHeroesAllocationCombination: jest
               .fn()
               .mockReturnValue(mockHeroes),
+            allocateHero: jest.fn(),
           },
         },
       ],

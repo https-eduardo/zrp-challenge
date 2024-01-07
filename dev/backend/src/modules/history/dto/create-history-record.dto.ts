@@ -7,7 +7,7 @@ import {
   IsString,
 } from 'class-validator';
 
-export class CreateRecordDto {
+export class CreateHistoryRecordDto {
   @IsNumber()
   heroId: number;
 

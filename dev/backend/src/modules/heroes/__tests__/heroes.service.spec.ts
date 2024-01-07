@@ -4,9 +4,11 @@ import { PrismaService } from '../../prisma/prisma.service';
 import { getMockHero } from './__mocks__/hero.mock';
 import { threatOccurence } from '../../threats/__tests__/__mocks__/threat-occurence.mock';
 import { Hero } from '@prisma/client';
+import { HistoryService } from '../../history/history.service';
 
 describe('HeroesService', () => {
   let service: HeroesService;
+  let historyService: HistoryService;
   let closeHeroes: Hero[];
   const mockHero = getMockHero();
 
@@ -14,6 +16,12 @@ describe('HeroesService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         HeroesService,
+        {
+          provide: HistoryService,
+          useValue: {
+            createNewRecord: jest.fn(),
+          },
+        },
         {
           provide: PrismaService,
           useValue: {
@@ -32,6 +40,7 @@ describe('HeroesService', () => {
     }).compile();
 
     service = module.get<HeroesService>(HeroesService);
+    historyService = module.get<HistoryService>(HistoryService);
   });
 
   it('should be defined', () => {
@@ -87,5 +96,17 @@ describe('HeroesService', () => {
 
     expect(allocatedHeroes).toHaveLength(1);
     expect(closeHeroes[0].longitude).toBe(8);
+  });
+
+  it('should allocate heroes in an occurrence', async () => {
+    jest.spyOn(service, 'updateHeroStatus');
+
+    await service.allocateHero(
+      { id: 1, ...mockHero } as Hero,
+      threatOccurence,
+      10,
+    );
+
+    expect(historyService.createNewRecord).toHaveBeenCalledTimes(1);
   });
 });
