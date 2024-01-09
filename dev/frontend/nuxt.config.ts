@@ -3,6 +3,11 @@ export default defineNuxtConfig({
   colorMode: {
     preference: "dark",
   },
+  runtimeConfig: {
+    public: {
+      apiUrl: process.env.API_URL,
+    },
+  },
   devtools: { enabled: true },
   css: ["@/assets/css/main.css"],
   modules: ["@nuxt/ui"],

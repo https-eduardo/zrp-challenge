@@ -1,5 +1,5 @@
 <template>
-  <UButton label="Entrar" :ui="ui" />
+  <UButton :ui="ui" />
 </template>
 
 <script lang="ts" setup>

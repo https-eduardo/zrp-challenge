@@ -19,7 +19,7 @@ const props = defineProps(["pageCount", "total", "modelValue"]);
 const ui = {
   wrapper: "flex items-center -space-x-px",
   rounded: "rounded-none",
-  base: "!bg-black text-gray-300 !ring-gray-200 hover:!text-primary-500",
+  base: "!bg-black text-gray-300 !ring-gray-300 hover:!text-primary-500",
 };
 
 defineEmits(["update:model-value"]);

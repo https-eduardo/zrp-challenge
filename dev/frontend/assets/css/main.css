@@ -5,6 +5,7 @@ html {
 }
 
 html, body, #__nuxt {
+  background-color: #0F0F0F;
   height:100%!important;
   width: 100%!important;
 }

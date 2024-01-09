@@ -1,5 +1,7 @@
 <template>
-  <AuthFormContainer title="Acessar painel" />
+  <auth-form-container title="Acessar painel">
+    <auth-login-form />
+  </auth-form-container>
 </template>
 
 <script lang="ts" setup>
