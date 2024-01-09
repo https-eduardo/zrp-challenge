@@ -30,6 +30,15 @@ export const useUserStore = defineStore("user", {
         credentials: "include",
       });
     },
+    async logout() {
+      const config = useRuntimeConfig();
+
+      return await $fetch(`${config.public.apiUrl}/auth/logout`, {
+        method: "POST",
+        credentials: "include",
+        headers: useRequestHeaders(),
+      });
+    },
     async register(registerData: RegisterData) {
       const config = useRuntimeConfig();
 
