@@ -38,8 +38,7 @@
 <script lang="ts" setup>
 import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types";
-const config = useRuntimeConfig();
-const router = useRouter();
+const userStore = useUserStore();
 
 const state = reactive({
   email: undefined,
@@ -60,12 +59,8 @@ type Schema = z.output<typeof schema>;
 
 async function handleSubmit(event: FormSubmitEvent<Schema>) {
   try {
-    await $fetch(`${config.public.apiUrl}/auth`, {
-      method: "POST",
-      body: event.data,
-      credentials: "include",
-    });
-    router.push("/");
+    await userStore.login(event.data);
+    navigateTo("/");
   } catch {
     form.value.setErrors([
       { path: "email", message: "E-mail ou senha inválidos" },
