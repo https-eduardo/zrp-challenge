@@ -3,3 +3,8 @@
 html {
   font-family: "Inconsolata", monospace, sans-serif;
 }
+
+html, body, #__nuxt {
+  height:100%!important;
+  width: 100%!important;
+}

@@ -1,7 +1,7 @@
 <template>
   <div class="relative flex flex-col gap-1">
     <label class="text-gray-300">{{ $attrs.label }}</label>
-    <UInput :ui="ui" color="primary" v-bind="$attrs" size="xl" />
+    <UInput :ui="ui" color="primary" v-bind="$attrs" />
   </div>
 </template>
 
