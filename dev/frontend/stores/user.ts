@@ -9,6 +9,12 @@ interface LoginData {
   password: string;
 }
 
+interface RegisterData {
+  name: string;
+  email: string;
+  password: string;
+}
+
 export const useUserStore = defineStore("user", {
   state: () =>
     ({
@@ -22,6 +28,14 @@ export const useUserStore = defineStore("user", {
         method: "POST",
         body: loginData,
         credentials: "include",
+      });
+    },
+    async register(registerData: RegisterData) {
+      const config = useRuntimeConfig();
+
+      return await $fetch<User>(`${config.public.apiUrl}/users`, {
+        method: "POST",
+        body: registerData,
       });
     },
     async fetchUserData() {

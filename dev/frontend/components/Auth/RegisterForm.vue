@@ -6,6 +6,15 @@
     class="flex flex-col gap-4"
     @submit="handleSubmit"
   >
+    <base-form-group name="name" label="Nome de usuário">
+      <base-input
+        v-model="state.name"
+        size="xl"
+        icon="i-ion-person"
+        placeholder="ONUadmin1177"
+        autocomplete="off"
+      />
+    </base-form-group>
     <base-form-group name="email" label="E-mail">
       <base-input
         v-model="state.email"
@@ -26,12 +35,12 @@
       />
     </base-form-group>
     <span class="text-sm text-gray-300 text-right"
-      >Ainda não tem conta?
-      <NuxtLink class="text-primary-500" to="/register"
-        >Se cadastre aqui.</NuxtLink
+      >Já tem uma conta?
+      <NuxtLink class="text-primary-500" to="/login"
+        >Faça login aqui.</NuxtLink
       ></span
     >
-    <base-button label="Entrar" type="submit" size="xl" block />
+    <base-button label="Cadastrar-se" type="submit" size="xl" block />
   </u-form>
 </template>
 
@@ -41,12 +50,14 @@ import type { FormSubmitEvent } from "#ui/types";
 const userStore = useUserStore();
 
 const state = reactive({
+  name: undefined,
   email: undefined,
   password: undefined,
 });
 
 const required_error = "Este campo é obrigatório.";
 const schema = z.object({
+  name: z.string({ required_error }),
   email: z.string({ required_error }).email("Email inválido."),
   password: z.string({ required_error }),
 });
@@ -56,11 +67,11 @@ type Schema = z.output<typeof schema>;
 
 async function handleSubmit(event: FormSubmitEvent<Schema>) {
   try {
-    await userStore.login(event.data);
-    navigateTo("/");
+    await userStore.register(event.data);
+    navigateTo("/login");
   } catch {
     form.value.setErrors([
-      { path: "email", message: "E-mail ou senha inválidos" },
+      { path: "name", message: "Não foi possível realizar o cadastro." },
     ]);
   }
 }
