@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   },
   devtools: { enabled: true },
   css: ["@/assets/css/main.css"],
-  modules: ["@nuxt/ui", "@pinia/nuxt"],
+  modules: ["@nuxt/ui", "@pinia/nuxt", "nuxt3-leaflet"],
   ui: {
     icons: ["ion"],
   },
