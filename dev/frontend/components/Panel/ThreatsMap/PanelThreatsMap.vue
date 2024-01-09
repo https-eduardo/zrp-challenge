@@ -4,7 +4,7 @@
     :center="[47.21322, -1.559482]"
     :zoom="3"
     :min-zoom="2"
-    :options="{ zoomControl: false, attributionControl: false }"
+    :options="{ attributionControl: false }"
   >
     <LTileLayer
       url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"

@@ -9,3 +9,16 @@ html, body, #__nuxt {
   height:100%!important;
   width: 100%!important;
 }
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+ 
+::-webkit-scrollbar-track {
+  box-shadow: none;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background-color: theme('colors.gray.300');;
+  outline: none;
+}

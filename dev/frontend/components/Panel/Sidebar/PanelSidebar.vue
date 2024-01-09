@@ -18,7 +18,7 @@
     <base-button
       class="!border-0 text-gray-500 hover:!border-l-4"
       label="$ desconectar"
-      icon="i-ion-log-out-outline"
+      icon="i-ion-md-redo"
       trailing
       block
       @click="handleLogout"
