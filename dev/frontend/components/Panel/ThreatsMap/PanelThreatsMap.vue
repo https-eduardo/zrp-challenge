@@ -13,9 +13,17 @@
       name="Stadia.StamenToner"
       :max-zoom="8"
     />
+    <panel-threat-marker
+      v-for="(allocation, index) in allocations"
+      :allocation="allocation"
+      :key="index"
+    />
   </LMap>
 </template>
 
 <script lang="ts" setup>
+import PanelThreatMarker from "./PanelThreatMarker.vue";
+
 const map = ref();
+const allocations = useAllocationsStore().allocations;
 </script>

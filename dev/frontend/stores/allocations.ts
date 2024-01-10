@@ -24,7 +24,7 @@ export const useAllocationsStore = defineStore("allocations", {
     getAllocationNotification(allocation: Allocation) {
       const heroesName = allocation.heroes.map((hero) => hero.name).join(" e ");
       const minutes = Math.floor(allocation.duration / 60);
-      const seconds = allocation.duration % 60;
+      const seconds = Math.floor(allocation.duration % 60);
 
       return {
         title: `Nova ameaça sendo combatida por ${heroesName}.`,

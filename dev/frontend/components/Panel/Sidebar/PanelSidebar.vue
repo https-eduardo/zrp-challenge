@@ -8,7 +8,7 @@
         height="85px"
       />
       <div class="flex flex-col gap-3 items-center">
-        <panel-sidebar-link to="/">Ameaças ativas</panel-sidebar-link>
+        <panel-sidebar-link to="/">Ameaças rastreadas</panel-sidebar-link>
         <panel-sidebar-link to="/heroes">Gerenciar heróis</panel-sidebar-link>
         <panel-sidebar-link to="/history"
           >Histórico de ameaças</panel-sidebar-link
