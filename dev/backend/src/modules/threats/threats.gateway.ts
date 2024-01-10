@@ -28,7 +28,10 @@ export class ThreatsGateway implements OnModuleInit {
 
       if (allocation) return this.socketServer.emit('allocation', allocation);
 
-      this.socketServer.emit('allocationFailed', occurrence);
+      this.socketServer.emit('allocationFailed', {
+        threatName: occurrence.monster.name,
+        threatRank: occurrence.dangerLevel,
+      });
     });
   }
 }
