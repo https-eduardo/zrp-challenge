@@ -5,7 +5,9 @@ import { Socket, io } from 'socket.io-client';
 import { ThreatOccurence } from '../../common/types/occurrence.payload';
 import { HeroesService } from '../heroes/heroes.service';
 
-@WebSocketGateway()
+@WebSocketGateway({
+  cors: { origin: process.env.ORIGIN },
+})
 export class ThreatsGateway implements OnModuleInit {
   @WebSocketServer()
   private socketServer: Socket;
@@ -24,9 +26,9 @@ export class ThreatsGateway implements OnModuleInit {
     this.socket.on('occurrence', async (occurrence: ThreatOccurence) => {
       const allocation = await this.service.handleOccurrence(occurrence);
 
-      if (allocation) return this.socketServer.send('allocation', allocation);
+      if (allocation) return this.socketServer.emit('allocation', allocation);
 
-      this.socketServer.send('allocationFailed', occurrence);
+      this.socketServer.emit('allocationFailed', occurrence);
     });
   }
 }
