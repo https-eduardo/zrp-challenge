@@ -49,15 +49,17 @@ export const useUserStore = defineStore("user", {
     },
     async fetchUserData() {
       const config = useRuntimeConfig();
+      const { $socket } = useNuxtApp();
 
       try {
         const data = await $fetch<User>(`${config.public.apiUrl}/users/me`, {
           credentials: "include",
           headers: useRequestHeaders(),
         });
-
+        $socket.connect();
         this.user = data;
       } catch {
+        $socket.disconnect();
         this.user = null;
       }
 

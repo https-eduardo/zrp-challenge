@@ -20,6 +20,7 @@
     "@iconify-json/ion": "^1.1.15",
     "@nuxt/ui": "^2.11.1",
     "pinia": "^2.1.7",
+    "socket.io-client": "^4.7.3",
     "zod": "^3.22.4"
   }
 }
