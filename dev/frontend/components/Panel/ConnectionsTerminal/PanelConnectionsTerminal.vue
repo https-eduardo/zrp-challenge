@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-black flex flex-col py-4 px-6 border-2 border-gray-300 border-b-4 border-r-4"
+    class="bg-black flex flex-col py-4 px-6 border-2 border-gray-300 border-b-4 border-r-4 flex-auto"
   >
     <h2 class="font-bold text-xl text-primary-500">Conexões</h2>
     <div class="flex flex-col gap-1 h-48 overflow-auto mt-2">
