@@ -19,6 +19,7 @@
           class="!text-red-700"
           icon="i-ion-trash-outline"
           size="xs"
+          @click="() => toggleDeleteModal(row.id)"
         />
       </div>
     </template>
@@ -30,19 +31,51 @@
       :total="heroes?.total"
     />
   </div>
+  <panel-hero-delete-modal
+    @cancel="toggleDeleteModal"
+    @confirm="deleteHero"
+    v-model="state.deleteModalOpen"
+    :heroId="state.heroId"
+  />
 </template>
 
 <script lang="ts" setup>
 import type { HeroesFetchResponse } from "~/types/heroes";
 import PanelHeroStatus from "./PanelHeroStatus.vue";
+import PanelHeroDeleteModal from "../HeroesModals/PanelHeroDeleteModal.vue";
 
 const config = useRuntimeConfig();
 const page = ref(1);
+const state = reactive<{ deleteModalOpen: boolean; heroId?: number }>({
+  deleteModalOpen: false,
+  heroId: undefined,
+});
 const perPage = 10;
 const slots = ["status-data", "actions-data"];
 const { allocations } = useAllocationsStore();
 
-const { pending, data: heroes } = await useLazyAsyncData<HeroesFetchResponse>(
+function toggleDeleteModal(heroId?: number) {
+  state.deleteModalOpen = !state.deleteModalOpen;
+  state.heroId = heroId;
+}
+
+async function deleteHero() {
+  try {
+    await $fetch(`${config.public.apiUrl}/heroes/${state.heroId}`, {
+      method: "DELETE",
+      credentials: "include",
+      headers: useRequestHeaders(),
+    });
+  } catch {}
+  refresh();
+  toggleDeleteModal();
+}
+
+const {
+  pending,
+  data: heroes,
+  refresh,
+} = await useLazyAsyncData<HeroesFetchResponse>(
   "heroes",
   () =>
     $fetch(
