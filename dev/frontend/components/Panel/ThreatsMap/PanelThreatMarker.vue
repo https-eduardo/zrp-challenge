@@ -15,7 +15,7 @@
 import PanelThreatPopup from "./PanelThreatPopup.vue";
 import type { Allocation } from "~/types/allocation";
 import type { Hero } from "~/types/heroes";
-const DEFAULT_ICON = "https://i.imgur.com/NCtrK9c.png";
+const DEFAULT_ICON = "https://i.imgur.com/VBSV02e.png";
 
 const { allocation } = defineProps<{ allocation: Allocation }>();
 

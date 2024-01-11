@@ -1,6 +1,6 @@
 <template>
   <UModal :ui="ui">
-    <h1 class="font-bold text-lg text-gray-300">{{ props.title }}</h1>
+    <h1 class="font-bold text-xl text-primary-500">{{ props.title }}</h1>
     <h2 class="font-medium text-sm text-gray-400">{{ props.subtitle }}</h2>
     <slot></slot>
     <div class="flex gap-2 justify-between my-4">

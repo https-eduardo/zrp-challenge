@@ -4,12 +4,12 @@
       <base-button
         @click="() => $emit('cancel')"
         label="Cancelar"
-        class="border-0 bg-gray-300 text-black hover:!border-0"
+        class="border-0 border-transparent bg-gray-300 text-black hover:!text-black"
       />
       <base-button
         @click="() => $emit('confirm')"
         label="Deletar"
-        class="bg-red-700 border-0 hover:!text-gray-300 hover:!border-0 focus:!text-black"
+        class="bg-red-700 border-0 hover:!text-gray-300 border-transparent focus:!text-black"
       />
     </template>
   </base-modal>
