@@ -17,7 +17,7 @@ export const useAllocationsStore = defineStore("allocations", {
       }, allocation.duration * 1000);
     },
     remove(allocation: Allocation) {
-      const idx = this.allocations.findIndex((v) => v === allocation);
+      const idx = this.allocations.findIndex((v) => v.id === allocation.id);
 
       this.allocations.splice(idx, 1);
     },

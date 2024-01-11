@@ -119,6 +119,8 @@ export class HeroesService {
   ) {
     for (const hero of heroes) {
       this.updateHeroStatus(hero.id, HeroStatus.UNAVAILABLE);
+      const { lat, lng } = occurrence.location[0];
+      this.updateOne(hero.id, { latitude: lat, longitude: lng });
 
       setTimeout(() => {
         this.updateHeroStatus(hero.id, HeroStatus.AVAILABLE);

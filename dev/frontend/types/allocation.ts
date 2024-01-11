@@ -6,6 +6,7 @@ interface AllocationPosition {
 }
 
 export interface Allocation {
+  id: number;
   heroes: Hero[];
   threatName: string;
   threatRank: string;
