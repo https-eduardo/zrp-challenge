@@ -3,7 +3,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { User } from 'src/common/decorators/user.decorator';
+import { User } from '../../common/decorators/user.decorator';
 import { JwtUserPayload } from 'src/common/types/jwt.payload';
 
 @Controller('users')

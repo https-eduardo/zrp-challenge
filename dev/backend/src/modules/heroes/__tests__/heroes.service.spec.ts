@@ -101,8 +101,8 @@ describe('HeroesService', () => {
   it('should allocate heroes in an occurrence', async () => {
     jest.spyOn(service, 'updateHeroStatus');
 
-    await service.allocateHero(
-      { id: 1, ...mockHero } as Hero,
+    await service.allocateHeroes(
+      [{ id: 1, ...mockHero } as Hero],
       threatOccurence,
       10,
     );

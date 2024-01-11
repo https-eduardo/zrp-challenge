@@ -8,8 +8,8 @@ import {
 } from 'class-validator';
 
 export class CreateHistoryRecordDto {
-  @IsNumber()
-  heroId: number;
+  @IsNumber({}, { each: true })
+  heroes: number[];
 
   @IsDate()
   finishDate: Date;

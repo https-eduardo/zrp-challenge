@@ -8,7 +8,11 @@ export class HistoryService {
   constructor(private readonly prisma: PrismaService) {}
 
   async createNewRecord(createRecordDto: CreateHistoryRecordDto) {
-    return await this.prisma.history.create({ data: createRecordDto });
+    const heroesConnections = createRecordDto.heroes.map((id) => ({ id }));
+
+    return await this.prisma.history.create({
+      data: { ...createRecordDto, heroes: { connect: heroesConnections } },
+    });
   }
 
   async findManyRecords(pagination: PaginationQueryDto) {
@@ -19,11 +23,12 @@ export class HistoryService {
         this.prisma.history.findMany({
           skip: limit && page ? limit * (page - 1) : 0,
           take: limit,
+          include: { heroes: true },
         }),
       ]);
       const total = transaction[0];
       const data = transaction[1];
-      const totalPages = limit ? total / limit : 1;
+      const totalPages = limit ? Math.floor(total / limit) : 1;
 
       return { data, total, totalPages };
     } catch {

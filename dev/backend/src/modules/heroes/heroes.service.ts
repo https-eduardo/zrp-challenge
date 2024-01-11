@@ -41,7 +41,7 @@ export class HeroesService {
       ]);
       const total = transaction[0];
       const data = transaction[1];
-      const totalPages = limit ? total / limit : 1;
+      const totalPages = limit ? Math.floor(total / limit) : 1;
 
       return { data, total, totalPages };
     } catch {
@@ -112,28 +112,30 @@ export class HeroesService {
     });
   }
 
-  async allocateHero(
-    hero: Hero,
+  async allocateHeroes(
+    heroes: Hero[],
     occurrence: ThreatOccurence,
     duration: number,
   ) {
-    await this.updateHeroStatus(hero.id, HeroStatus.UNAVAILABLE);
+    for (const hero of heroes) {
+      this.updateHeroStatus(hero.id, HeroStatus.UNAVAILABLE);
 
-    setTimeout(() => {
-      this.updateHeroStatus(hero.id, HeroStatus.AVAILABLE);
-    }, duration * 1000);
+      setTimeout(() => {
+        this.updateHeroStatus(hero.id, HeroStatus.AVAILABLE);
+      }, duration * 1000);
+    }
 
     const finishDate = new Date();
     finishDate.setSeconds(finishDate.getSeconds() + duration);
 
     const historyRecord: CreateHistoryRecordDto = {
-      heroId: hero.id,
+      heroes: heroes.map(({ id }) => id),
       finishDate,
       threatName: occurrence.monster.name,
       threatRank: occurrence.dangerLevel,
     };
 
-    await this.historyService.createNewRecord(historyRecord);
+    return await this.historyService.createNewRecord(historyRecord);
   }
 
   private isPriorityHero(hero: Hero, occurrence: ThreatOccurence) {

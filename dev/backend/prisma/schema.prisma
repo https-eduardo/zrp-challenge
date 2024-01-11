@@ -41,8 +41,7 @@ enum HeroStatus {
 
 model History {
   id         Int        @id @default(autoincrement())
-  hero       Hero       @relation(fields: [heroId], references: [id])
-  heroId     Int
+  heroes     Hero[]
   threatName String
   threatRank ThreatRank
   finishDate DateTime

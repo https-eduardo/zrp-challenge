@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ThreatOccurence } from '../../common/types/occurrence.payload';
 import { HeroesService } from '../heroes/heroes.service';
-import { ThreatAllocation } from 'src/common/types/threat-allocation.type';
+import { ThreatAllocation } from '../../common/types/threat-allocation.type';
 import { ALLOCATIONS } from './threats.allocation';
 
 @Injectable()
@@ -23,16 +23,20 @@ export class ThreatsService {
     if (!allocatedHeroes || allocatedHeroes.length === 0) return null;
 
     const duration = this.getDurationOfAllocation(occurrence);
+    const { id } = await this.heroesService.allocateHeroes(
+      allocatedHeroes,
+      occurrence,
+      duration,
+    );
+
     const threatAllocation: ThreatAllocation = {
+      id,
       heroes: allocatedHeroes,
       duration,
       position: occurrence.location[0],
       threatName: occurrence.monster.name,
       threatRank: occurrence.dangerLevel,
     };
-    allocatedHeroes.forEach((hero) => {
-      this.heroesService.allocateHero(hero, occurrence, duration);
-    });
 
     return threatAllocation;
   }
