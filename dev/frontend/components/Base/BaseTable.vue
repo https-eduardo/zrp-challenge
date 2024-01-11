@@ -1,12 +1,13 @@
 <template>
-  <UTable
-    :ui="ui"
-    :loading-state="states.loading"
-    :empty-state="states.empty"
-  />
+  <UTable :ui="ui" :loading-state="states.loading" :empty-state="states.empty">
+    <template v-for="slotName in props.slots" v-slot:[slotName]="{ row }">
+      <slot :name="slotName" :row="row"></slot>
+    </template>
+  </UTable>
 </template>
 
 <script lang="ts" setup>
+const props = defineProps(["slots"]);
 const states = {
   loading: {
     icon: "i-ion-sync",
@@ -14,7 +15,7 @@ const states = {
   },
   empty: {
     icon: "i-ion-pulse",
-    label: "Sem registros.",
+    label: "Lista vazia",
   },
 };
 
@@ -24,10 +25,6 @@ const ui = {
   tbody: "divide-y divide-gray-300 dark:divide-gray-300",
   th: {
     color: "text-primary-500",
-  },
-  td: {
-    base: "whitespace-nowrap hover:bg-gray-300 cursor-default",
-    color: "hover:text-black",
   },
   loadingState: {
     label: "text-sm text-center text-gray-300",

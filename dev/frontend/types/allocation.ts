@@ -1,4 +1,4 @@
-import type { Hero } from "./hero";
+import type { Hero } from "./heroes";
 
 interface AllocationPosition {
   lat: number;

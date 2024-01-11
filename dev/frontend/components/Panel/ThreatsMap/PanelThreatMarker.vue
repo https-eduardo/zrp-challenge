@@ -14,7 +14,7 @@
 <script lang="ts" setup>
 import PanelThreatPopup from "./PanelThreatPopup.vue";
 import type { Allocation } from "~/types/allocation";
-import type { Hero } from "~/types/hero";
+import type { Hero } from "~/types/heroes";
 const DEFAULT_ICON = "https://i.imgur.com/NCtrK9c.png";
 
 const { allocation } = defineProps<{ allocation: Allocation }>();
@@ -25,3 +25,4 @@ const getHeroUrl = (hero?: Hero) => {
   return hero.imageUrl;
 };
 </script>
+~/types/heroes

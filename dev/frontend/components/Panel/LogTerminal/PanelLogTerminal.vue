@@ -14,7 +14,7 @@
         </p>
       </div>
     </div>
-    <p class="text-gray-400 text-sm">$ command</p>
+    <p class="text-gray-400 text-sm">$</p>
   </div>
 </template>
 

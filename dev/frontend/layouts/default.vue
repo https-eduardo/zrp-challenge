@@ -2,9 +2,7 @@
   <div class="flex h-full">
     <panel-sidebar />
     <nuxt-page class="my-6 mx-8" />
-    <u-notifications
-      :ui="{ position: 'top-0 bottom-auto right-0 z-[999]' }"
-    ></u-notifications>
+    <u-notifications :ui="{ position: 'bottom-0 right-0 z-[999]' }" />
   </div>
 </template>
 
