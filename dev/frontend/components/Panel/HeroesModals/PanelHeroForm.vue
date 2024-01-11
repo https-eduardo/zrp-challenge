@@ -60,14 +60,14 @@ interface HeroState {
   position: HeroPosition;
 }
 
-const { type, submit, hero } = defineProps<{
+const props = defineProps<{
   type: "EDIT" | "CREATE";
   submit: (e: FormSubmitEvent<HeroesForm>) => any;
-  hero?: Hero;
+  hero?: Hero | null;
 }>();
 
 const submitButtonLabel = computed(() =>
-  type === "CREATE" ? "Criar" : "Salvar"
+  props.type === "CREATE" ? "Criar" : "Salvar"
 );
 
 const state: HeroState = reactive({
@@ -86,12 +86,16 @@ const schema = z.object({
   position: z.object({ lat: z.number(), lng: z.number() }, { required_error }),
 });
 
-onMounted(() => {
-  if (type === "EDIT" && hero) {
-    state.name = hero.name;
-    state.imageUrl = hero.imageUrl ?? undefined;
-    state.position = { lat: hero.latitude, lng: hero.longitude };
-    state.rank = hero.rank;
+watch(
+  () => props.hero,
+  () => {
+    const { hero, type } = props;
+    if (type === "EDIT" && hero) {
+      state.name = hero.name;
+      state.imageUrl = hero.imageUrl ?? undefined;
+      state.position = { lat: hero.latitude, lng: hero.longitude };
+      state.rank = hero.rank;
+    }
   }
-});
+);
 </script>
