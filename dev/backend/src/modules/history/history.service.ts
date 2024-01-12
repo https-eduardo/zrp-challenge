@@ -15,6 +15,13 @@ export class HistoryService {
     });
   }
 
+  async findNotFinishedRecords() {
+    return this.prisma.history.findMany({
+      where: { finishDate: { gt: new Date() } },
+      include: { heroes: true },
+    });
+  }
+
   async findManyRecords(pagination: PaginationQueryDto) {
     try {
       const { limit, page } = pagination;

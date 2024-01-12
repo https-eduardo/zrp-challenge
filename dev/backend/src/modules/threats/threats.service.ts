@@ -3,10 +3,14 @@ import { ThreatOccurence } from '../../common/types/occurrence.payload';
 import { HeroesService } from '../heroes/heroes.service';
 import { ThreatAllocation } from '../../common/types/threat-allocation.type';
 import { ALLOCATIONS } from './threats.allocation';
+import { HistoryService } from '../history/history.service';
 
 @Injectable()
 export class ThreatsService {
-  constructor(private readonly heroesService: HeroesService) {}
+  constructor(
+    private readonly heroesService: HeroesService,
+    private readonly historyService: HistoryService,
+  ) {}
 
   private getDurationOfAllocation(occurrence: ThreatOccurence) {
     const { min, max } = ALLOCATIONS[occurrence.dangerLevel].duration;
@@ -39,5 +43,27 @@ export class ThreatsService {
     };
 
     return threatAllocation;
+  }
+
+  async getActiveAllocations() {
+    const notFinishedAllocations =
+      await this.historyService.findNotFinishedRecords();
+
+    const activeAllocations = notFinishedAllocations.map((record) => {
+      const secondsLeft =
+        (record.finishDate.getTime() - record.createdAt.getTime()) / 1000;
+      return {
+        id: record.id,
+        duration: secondsLeft,
+        heroes: record.heroes,
+        position: {
+          lat: record.heroes[0].latitude,
+          lng: record.heroes[0].longitude,
+        },
+        threatName: record.threatName,
+        threatRank: record.threatRank,
+      } as ThreatAllocation;
+    });
+    return activeAllocations;
   }
 }

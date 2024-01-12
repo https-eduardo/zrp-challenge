@@ -19,6 +19,8 @@
   "dependencies": {
     "@iconify-json/ion": "^1.1.15",
     "@nuxt/ui": "^2.11.1",
+    "@pinia/nuxt": "^0.5.1",
+    "nuxt3-leaflet": "^1.0.12",
     "pinia": "^2.1.7",
     "socket.io-client": "^4.7.3",
     "zod": "^3.22.4"

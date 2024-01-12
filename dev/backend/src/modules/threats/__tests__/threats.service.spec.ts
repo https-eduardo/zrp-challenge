@@ -3,6 +3,8 @@ import { ThreatsService } from '../threats.service';
 import { HeroesService } from '../../heroes/heroes.service';
 import { getMockHero } from '../../heroes/__tests__/__mocks__/hero.mock';
 import { threatOccurence } from './__mocks__/threat-occurence.mock';
+import { HistoryService } from '../../history/history.service';
+import { mockHistoryRecord } from '../../history/__tests__/__mocks__/history-record.mock';
 
 describe('ThreatsService', () => {
   let service: ThreatsService;
@@ -21,6 +23,14 @@ describe('ThreatsService', () => {
               .fn()
               .mockReturnValue(mockHeroes),
             allocateHeroes: jest.fn().mockResolvedValue({ id: 1 }),
+          },
+        },
+        {
+          provide: HistoryService,
+          useValue: {
+            findNotFinishedRecords: jest
+              .fn()
+              .mockResolvedValue([mockHistoryRecord]),
           },
         },
       ],
@@ -44,5 +54,10 @@ describe('ThreatsService', () => {
       mockHeroes,
       threatOccurence,
     );
+  });
+  it('should get active allocations', async () => {
+    const allocations = await service.getActiveAllocations();
+
+    expect(allocations).toHaveLength(1);
   });
 });

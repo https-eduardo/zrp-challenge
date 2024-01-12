@@ -19,7 +19,7 @@ describe('HistoryService', () => {
             history: {
               create: jest.fn().mockResolvedValue(mockHistoryRecord),
               count: jest.fn(),
-              findMany: jest.fn(),
+              findMany: jest.fn().mockResolvedValue([mockHistoryRecord]),
             },
           },
         },
@@ -45,5 +45,12 @@ describe('HistoryService', () => {
 
     expect(result.data).toHaveLength(1);
     expect(result.data[0].threatName).toBe(mockHistoryRecord.threatName);
+  });
+
+  it('should retrieve history records with finishDate greater than now', async () => {
+    const result = await service.findNotFinishedRecords();
+
+    expect(result).toHaveLength(1);
+    expect(result[0].threatName).toBe(mockHistoryRecord.threatName);
   });
 });

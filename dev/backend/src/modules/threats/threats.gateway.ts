@@ -1,4 +1,8 @@
-import { WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
+import {
+  SubscribeMessage,
+  WebSocketGateway,
+  WebSocketServer,
+} from '@nestjs/websockets';
 import { ThreatsService } from './threats.service';
 import { OnModuleInit } from '@nestjs/common';
 import { Socket, io } from 'socket.io-client';
@@ -18,6 +22,12 @@ export class ThreatsGateway implements OnModuleInit {
     private readonly service: ThreatsService,
     private readonly heroesService: HeroesService,
   ) {}
+
+  @SubscribeMessage('getActiveAllocations')
+  async handleGetActiveAllocation() {
+    const activeAllocations = await this.service.getActiveAllocations();
+    return activeAllocations;
+  }
 
   async onModuleInit() {
     await this.heroesService.markAllHeroesAsAvailable();

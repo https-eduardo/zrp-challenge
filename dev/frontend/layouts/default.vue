@@ -14,6 +14,13 @@ const logsStore = useLogsStore();
 const toast = useToast();
 
 onMounted(() => {
+  $socket.emit("getActiveAllocations", (allocations: Allocation[]) => {
+    allocationsStore.clear();
+    allocations.forEach((allocation) => {
+      allocationsStore.add(allocation);
+    });
+  });
+
   $socket.on("allocation", (alloc: Allocation) => {
     allocationsStore.add(alloc);
     const notification = allocationsStore.getAllocationNotification(alloc);

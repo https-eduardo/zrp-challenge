@@ -10,6 +10,9 @@ export const useAllocationsStore = defineStore("allocations", {
       allocations: [],
     } as AllocationsStore),
   actions: {
+    clear() {
+      this.allocations.splice(0, this.allocations.length);
+    },
     add(allocation: Allocation) {
       this.allocations.push(allocation);
       setTimeout(() => {
