@@ -24,11 +24,12 @@ export class HistoryService {
           skip: limit && page ? limit * (page - 1) : 0,
           take: limit,
           include: { heroes: true },
+          orderBy: { createdAt: 'desc' },
         }),
       ]);
       const total = transaction[0];
       const data = transaction[1];
-      const totalPages = limit ? Math.floor(total / limit) : 1;
+      const totalPages = limit ? Math.ceil(total / limit) : 1;
 
       return { data, total, totalPages };
     } catch {

@@ -9,15 +9,7 @@ export const useLogsStore = defineStore("logs", {
     } as LogsStore),
   actions: {
     add(msg: string) {
-      const dateStr = new Date().toLocaleString("pt-BR", {
-        month: "2-digit",
-        year: "numeric",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-      });
-      const log = `${dateStr}  [LOG] ${msg}.`;
+      const log = `${DateUtils.formatDate(new Date())}  [LOG] ${msg}.`;
       this.logs.push(log);
     },
   },

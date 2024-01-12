@@ -11,7 +11,7 @@
         <panel-sidebar-link to="/">Ameaças rastreadas</panel-sidebar-link>
         <panel-sidebar-link to="/heroes">Gerenciar heróis</panel-sidebar-link>
         <panel-sidebar-link to="/history"
-          >Histórico de ameaças</panel-sidebar-link
+          >Histórico de alocações</panel-sidebar-link
         >
       </div>
     </div>

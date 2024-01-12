@@ -6,7 +6,11 @@
     :slots="slots"
   >
     <template #status-data="{ row }">
-      <panel-hero-status :status="row.status" />
+      <panel-table-status-badge
+        :status="row.status === 'AVAILABLE'"
+        label-active="Disponível"
+        label-deactivated="Indisponível"
+      />
     </template>
     <template #actions-data="{ row }">
       <div class="flex gap-2 justify-end">
@@ -48,7 +52,6 @@
 
 <script lang="ts" setup>
 import type { HeroesFetchResponse, HeroesForm } from "~/types/heroes";
-import PanelHeroStatus from "./PanelHeroStatus.vue";
 import PanelHeroDeleteModal from "../HeroesModals/PanelHeroDeleteModal.vue";
 import PanelHeroEditModal from "../HeroesModals/PanelHeroEditModal.vue";
 import type { FormSubmitEvent } from "#ui/types";

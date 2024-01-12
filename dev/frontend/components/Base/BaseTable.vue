@@ -26,6 +26,9 @@ const ui = {
   th: {
     color: "text-primary-500",
   },
+  td: {
+    base: "whitespace-wrap break-all",
+  },
   loadingState: {
     label: "text-sm text-center text-gray-300",
     icon: "w-6 h-6 mx-auto text-gray-300 mb-4 animate-spin",
