@@ -10,6 +10,7 @@ const ui = {
   },
 };
 const uiMenu = {
+  container: "z-[999] group",
   background: "bg-black",
   rounded: "rounded-none",
   ring: "ring-1 ring-gray-300",

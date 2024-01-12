@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-full">
+  <div class="flex h-full max-md:flex-col">
     <panel-sidebar />
     <nuxt-page class="my-6 mx-8" />
     <u-notifications :ui="{ position: 'bottom-0 right-0 z-[999]' }" />

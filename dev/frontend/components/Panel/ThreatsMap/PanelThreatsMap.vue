@@ -1,6 +1,5 @@
 <template>
   <LMap
-    ref="map"
     :center="[47.21322, -1.559482]"
     :zoom="3"
     :min-zoom="2"
@@ -14,9 +13,9 @@
       :max-zoom="8"
     />
     <panel-threat-marker
-      v-for="(allocation, index) in allocations"
+      v-for="allocation in allocations"
       :allocation="allocation"
-      :key="index"
+      :key="allocation.id"
     />
   </LMap>
 </template>
@@ -24,6 +23,5 @@
 <script lang="ts" setup>
 import PanelThreatMarker from "./PanelThreatMarker.vue";
 
-const map = ref();
 const allocations = useAllocationsStore().allocations;
 </script>

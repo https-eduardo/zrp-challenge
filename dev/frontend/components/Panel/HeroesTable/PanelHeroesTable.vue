@@ -82,6 +82,7 @@ function toggleEditModal(heroId?: number) {
 }
 
 function toggleDeleteModal(heroId?: number) {
+  state.heroId = heroId;
   if (heroId) state.deleteModalOpen = true;
   else state.deleteModalOpen = false;
 }

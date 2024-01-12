@@ -27,7 +27,11 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
   ) {
     const { accessToken } = await this.service.login(loginDto);
-    res.cookie('accessToken', accessToken, { sameSite: 'none', secure: true });
+    res.cookie('accessToken', accessToken, {
+      sameSite: 'none',
+      secure: true,
+      httpOnly: true,
+    });
   }
 
   @ApiOperation({ summary: 'Logout' })
