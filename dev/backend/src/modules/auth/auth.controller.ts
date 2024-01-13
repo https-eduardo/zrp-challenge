@@ -40,6 +40,10 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   async logout(@Res({ passthrough: true }) res: Response) {
-    res.clearCookie('accessToken');
+    res.clearCookie('accessToken', {
+      sameSite: 'none',
+      httpOnly: true,
+      secure: true,
+    });
   }
 }
