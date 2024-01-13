@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   app: {
     head: {
-      title: "IHeros",
+      title: "iHeros",
     },
   },
   colorMode: {
