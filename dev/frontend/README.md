@@ -1,75 +1,37 @@
-# Nuxt 3 Minimal Starter
+## Como rodar o Frontend
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Para rodar o frontend, certifique-se de estar utilizando a mesma versão do Node.js que consta no arquivo `.nvmrc`.
 
-## Setup
+### Definindo as váriaveis de ambiente
 
-Make sure to install the dependencies:
+Todas as váriaveis de ambiente utilizadas estão no arquivo de exemplo das váriaveis de ambiente `.env.example`.
+
+Insira as váriaveis com seus respectivos valores em um arquivo `.env`.
+
+### Instalando as dependências
 
 ```bash
-# npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+### Servidor de desenvolvimento
 
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+O servidor de desenvolvimento ficará disponível em: `http://localhost:3000`
 
-Build the application for production:
+### Montando aplicação para produção
 
 ```bash
-# npm
 npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
 
-Locally preview production build:
+Para rodar sua build de produção utilize
 
 ```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+node .output/server/index.mjs
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+O servidor de produção fica disponível no mesmo endereço que o servidor de desenvolvimento.
