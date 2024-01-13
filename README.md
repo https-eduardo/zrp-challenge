@@ -1,10 +1,10 @@
-### iHeros - Teste Fullstack
+## iHeros - Teste Fullstack
 
 O projeto está disponivel em: https://exquisite-choux-c9758b.netlify.app
 
 ![Painel do aplicativo com um mapa mostrando as alocações dos heróis](https://i.imgur.com/Ny4m5pZ.png)
 
-#### Introdução ao código
+### Introdução ao código
 
 O projeto foi desenvolvido utilizando **Node.js** e todos os 5 níveis foram realizados.
 
@@ -16,28 +16,28 @@ Para manipular os dados do banco utilizei o **Prisma**, um ORM, devido, principa
 
 Optei pelo **PostgreSQL**, um banco de dados relacional, já que o formato dos dados era previsível e havia relações entre eles.
 
-#### Como rodar
+### Como rodar
 
 Siga as instruções em cada parte do projeto (backend e frontend):
 
 - [Frontend](./dev/frontend/README.md)
 - [Backend](./dev/backend/README.md)
 
-#### Recursos adicionais
+### Recursos adicionais
 
 - **Rastreamento de ameaças com mapa**
   As ameaças sendo combatidas são mostradas em um mapa pra deixar mais legal a utilização do aplicativo.
 - **Status de combate de ameaça e de herói**
   As tabelas de herói e histórico possibilitam a visualização da disponibilidade do herói e se uma ameaça presente no histórico já foi finalizada.
 
-#### Proxímos passos
+### Proxímos passos
 
 - Adicionar testes no frontend (no momento só têm no backend)
 - Refatorar algumas partes do frontend - agrupar funções de fetch e reduzir possíveis repetições de código
 - Configurar Docker
 - Procurar por uma melhor maneira de desalocar um herói (utilizando useTimeout no momento)
 
-#### Conclusão
+### Conclusão
 
 Foi muito legal desenvolver o projeto, e gostei dos desafios que enfrentei. Amei planejar o código de alocação inteligente e depois implementá-lo e vê-lo funcionando. Também já fazia um tempo que não trabalhava com **WebSockets**, então foi muito prazeroso utilizar novamente eles. Agradeço a **ZRP** por disponibilizar este teste técnico em seu repositório e incentivar a sua realização.
 

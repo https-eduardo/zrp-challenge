@@ -40,7 +40,7 @@ describe('AuthController', () => {
     expect(mockResponse.cookie).toHaveBeenCalledWith(
       'accessToken',
       mockLoginData.accessToken,
-      { httpOnly: true },
+      { httpOnly: true, sameSite: 'none', secure: true },
     );
   });
 
